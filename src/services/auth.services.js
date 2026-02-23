@@ -43,7 +43,7 @@ async function registerUser(email , password , role){
     })
 
     //return 
-    return { id : newUser._id , email : newUser.email , message : "User Registered"}
+    return { id : newUser._id , email : newUser.email ,role:newUser.role, message : "Registered"}
     
 }
 
@@ -60,7 +60,7 @@ async function loginUser(email , password){
         throw new Error("Incorrect Password")
     }
     const access_secret = process.env.JWT_SECRET
-    const accessToken = jwt.sign({id:userExists._id, role:userExists.role},access_secret,{"expiresIn" :  "15m"})
+    const accessToken = jwt.sign({id:userExists._id, role:userExists.role},access_secret,{"expiresIn" :  "1h"})
 
     const refresh_secret = process.env.JWT_REFRESH_SECRET
     const refreshToken = jwt.sign({id:userExists._id, role:userExists.role},refresh_secret,{"expiresIn":"7d"})
@@ -69,14 +69,11 @@ async function loginUser(email , password){
     const hashedRefreshedToken = await bcrypt.hash(refreshToken,12)
     userExists.refreshToken = hashedRefreshedToken
     await userExists.save()
-
     return {
         accessToken,
         refreshToken
     }
 }
-
-
 export default {
     registerUser,
     loginUser

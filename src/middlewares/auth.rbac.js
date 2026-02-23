@@ -10,4 +10,4 @@ const authorize = (requiredPermission) => {
     }
 }
 
-export default authorize
+export default authorize 
