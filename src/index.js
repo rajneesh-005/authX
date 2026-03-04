@@ -1,13 +1,13 @@
-import express from 'express'
 import dotenv from 'dotenv'
+dotenv.config();
+
+import express from 'express'
 import connectionDB from './config/db.js';
 import authRoute from './routes/auth.routes.js'
 import taskRoute from './routes/task.routes.js'
 import cookieParser from 'cookie-parser';
 
 const app = express();
-dotenv.config();
-
 
 const port = process.env.PORT;
 const url = process.env.DATABASE_URL;
@@ -23,7 +23,7 @@ app.use("/api/auth",authRoute)
 app.use('/api/task',taskRoute)
 
 app.get("/",(req,res)=>{
-    res.send("Hello World");
+    res.send("Started");
 })
 
 app.listen(port, ()=>{

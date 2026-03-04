@@ -13,8 +13,6 @@ const authMiddleware = (req,res,next) => {
     }
 
     const token = authHeader.split(' ')[1]
-
-    console.log("Token ",token)
     const secret = process.env.JWT_SECRET
 
     try{

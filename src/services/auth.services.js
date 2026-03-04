@@ -23,7 +23,7 @@ const validate = ({email , password}) =>{
     }
 }
 
-async function registerUser(email , password , role){
+async function registerUser(email , password){
     validate({email , password})
 
     //Check for Duplicate User
@@ -39,7 +39,6 @@ async function registerUser(email , password , role){
     const newUser = await User.create({
         email,
         password:hashedPassword,
-        role
     })
 
     //return 

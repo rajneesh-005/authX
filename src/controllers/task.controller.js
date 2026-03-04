@@ -46,6 +46,7 @@ const updateTask = async(req,res) => {
         const taskId = req.params.id
         const title = req.body.title
         const description = req.body.description
+        const role = req.user.role
         const result = await taskService.UpdateTask({userId,taskId,title,description,role})
         if(!result){
             return res.status(404).json({message : "Task To Be Updated Not Found"})
